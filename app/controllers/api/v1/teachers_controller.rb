@@ -44,6 +44,11 @@ module Api
         render body: nil, status: :no_content
       end
 
+      def students_by_course
+        course = Course.find(params[:course_id])
+        render json: StudentSerializer.new(course.students)
+      end
+
       private
 
       def teacher_params
@@ -52,6 +57,10 @@ module Api
 
       def war_params
         params.permit(:teacher_id, :challenger_course_id, :opponent_course_id, :challenger_course_points, :opponent_course_points, :opponent_course_name)
+      end
+
+      def student_params
+        params.permit(:course_id)
       end
     end
   end

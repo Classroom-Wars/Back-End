@@ -12,6 +12,7 @@ Rails.application.routes.draw do
         post '/courses/prizes', to: 'prizes#create'
         get '/courses/all-prizes', to: 'prizes#index'
         delete '/courses/prizes', to: 'prizes#destroy'
+        get '/courses/students', :action => 'students_by_course'
         resources :courses do
         end
       end

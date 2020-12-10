@@ -1,9 +1,9 @@
 "id","name","prize_points","course_id"
-1,"Prize 1",10,27
-2,"Prize 2",5,27
-3,"Prize 3",15,27
-4,"Prize 4",15,28
-5,"Prize 5",20,28
+1,"Homework Pass",10,27
+2,"Redo an Assignment",5,27
+3,"Pick the Pom Song",15,27
+4,"Homework Pass",15,28
+5,"Redo an Assignment",20,28
 6,"Hyrule Shield",5,1
 7,"Majoras Mask",50,1
 8,"Great Sword",10,2

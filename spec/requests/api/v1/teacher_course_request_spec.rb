@@ -107,4 +107,39 @@ RSpec.describe 'teachers courses' do
     expect(course[:data][:attributes][:teacher_id]).to eq(course1.teacher_id)
   end
 
+  it 'can see all students in a course' do
+    teacher1 = create(:teacher)
+    course1 = teacher1.courses.create({
+      name: 'Principles of Real Estate',
+      course_code: 'abcd1234',
+      school_name: 'Hogwarts High School',
+      teacher_id: teacher1.id,
+      course_points: 852
+    })
+
+    student1 = create(:student)
+    student2 = create(:student)
+    student3 = create(:student)
+    student4 = create(:student)
+    student5 = create(:student)
+    student6 = create(:student)
+    student1.course_students.create(course_id: course1.id, student_points: 101)
+    student2.course_students.create(course_id: course1.id, student_points: 98)
+    student3.course_students.create(course_id: course1.id, student_points: 75)
+    student4.course_students.create(course_id: course1.id, student_points: 111)
+    student5.course_students.create(course_id: course1.id, student_points: 155)
+    student6.course_students.create(course_id: course1.id, student_points: 123)
+
+    course_params = ({course_id: course1.id})
+    get "/api/v1/teachers/courses/students", params: course_params
+    expect(response).to be_successful
+    returned_students = JSON.parse(response.body, symbolize_names: true)[:data]
+    expect(returned_students.count).to eq(6)
+    expect(returned_students[0][:id].to_i).to eq(student1.id)
+    expect(returned_students[1][:id].to_i).to eq(student2.id)
+    expect(returned_students[2][:id].to_i).to eq(student3.id)
+    expect(returned_students[3][:id].to_i).to eq(student4.id)
+    expect(returned_students[4][:id].to_i).to eq(student5.id)
+    expect(returned_students[5][:id].to_i).to eq(student6.id)
+  end
 end
